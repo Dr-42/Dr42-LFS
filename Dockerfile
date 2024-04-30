@@ -25,3 +25,12 @@ RUN apk add --no-cache \
 
 RUN apk del --no-cache apk-tools
 
+# Create a group and user
+RUN addgroup -S lfs-grp && adduser -S lfs -G lfs-grp
+USER lfs
+
+# Set the prompt
+RUN echo "PS1='\[\033[01;32m\]\u@:\[\033[01;34m\]\w\[\033[00m\]\> '" > /home/lfs/.bashrc
+
+# Set the working directory
+WORKDIR /home/lfs
